@@ -52,7 +52,7 @@ strings = {
     },
 }
 
-GITHUB_URL="https://github.com/AlexeiCrystal"
+GITHUB_URL="https://github.com/AlexeiCrystal/extera-custom-name-icon"
 
 REQUEST_PICK_IMAGE = 3721
 
