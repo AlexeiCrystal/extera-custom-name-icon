@@ -5,6 +5,8 @@ __description__ = """**EN:** Allows you to set a custom name and icon for the cl
 __version__ = "1.0"
 __author__ = "github.com/AlexeiCrystal"
 __icon__ = "exteraGram/0"
+__app_version__ = ">=11.12.0"
+__sdk_version__ = ">=1.4.3.3"
 
 import base64
 from java.io import ByteArrayOutputStream
