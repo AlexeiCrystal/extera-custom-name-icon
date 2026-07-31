@@ -27,7 +27,7 @@ from android.net import Uri
 from base_plugin import BasePlugin, MethodHook
 from client_utils import get_last_fragment
 from hook_utils import find_class
-from ui.settings import Input, Text, Header
+from ui.settings import Input, Text, Header, Divider
 
 strings = {
     "ru": {
@@ -38,6 +38,7 @@ strings = {
         "select_custom_icon": "Выбрать кастомную иконку",
         "shortcut": "Ярлык",
         "create_shortcut": "Создать ярлык",
+        "create_shortcut_info": "Для отображения кастомного имени и иконки на рабочем столе необходимо создать отдельный ярлык. Перед изменением не забудьте удалить старый созданный ярлык, если вы до этого его создавали",
         "reset_to_default": "Сбросить по умолчанию",
         "info": "Информация"
     },
@@ -49,6 +50,7 @@ strings = {
         "select_custom_icon": "Select custom icon",
         "shortcut": "Shortcut",
         "create_shortcut": "Create shortcut",
+        "create_shortcut_info": "To display a custom name and icon on the launcher, you need to create a separate shortcut. Before making any changes, don’t forget to delete the old shortcut, if you had created one previously",
         "reset_to_default": "Reset to default",
         "info": "Info"
     },
@@ -156,7 +158,7 @@ def pick_icon(v):
         intent = Intent(Intent.ACTION_PICK)
         intent.setType("image/*")
         activity.startActivityForResult(intent, REQUEST_PICK_IMAGE)
-        
+
 def create_shortcut(name: str, icon_bitmap: Bitmap = None):
     try:
         context = get_application_context()
@@ -372,7 +374,7 @@ class ExteraCustomNameIconPlugin(BasePlugin):
             hooks_cl = self.hook_all_methods(ClassLoaderClass, "loadClass", ClassLoaderHook())
             if hooks_cl:
                 self.unhook_list.extend(hooks_cl)
-                
+
     def on_plugin_unload(self):
         if self.unhook_list:
             for unhook in self.unhook_list:
@@ -403,7 +405,7 @@ class ExteraCustomNameIconPlugin(BasePlugin):
             self.get_setting("custom_client_name", get_client_name()),
             icon_bitmap=get_saved_icon(self)
         )
-        
+
     def on_open_github(self, v):
         Browser.openUrl(get_current_activity(), Uri.parse(GITHUB_URL))
 
@@ -449,6 +451,7 @@ class ExteraCustomNameIconPlugin(BasePlugin):
                 on_click=self.on_create_shortcut,
                 accent=True
             ),
+            Divider(text=get_str("create_shortcut_info")),
             Header(text=get_str("info")),
             Text(
                 link_alias="plugin_info",
