@@ -2,8 +2,8 @@ __id__ = "extera_custom_name_icon"
 __name__ = "Custom Name & Icon"
 __description__ = """**EN:** Allows you to set a custom name and icon for the client in the recent apps menu and on the launcher
 **RU:** Позволяет установить кастомное имя и иконку клиента в меню недавних приложений и на рабочем столе"""
-__version__ = "1.0"
-__author__ = "github.com/AlexeiCrystal"
+__version__ = "1.1"
+__author__ = "@AlexeiCrystal"
 __icon__ = "exteraGram/0"
 __app_version__ = ">=11.12.0"
 __sdk_version__ = ">=1.4.3.3"
@@ -57,6 +57,7 @@ strings = {
 }
 
 GITHUB_URL="https://github.com/AlexeiCrystal/extera-custom-name-icon"
+PACKIT_URL="tg://packit?plugin=extera_custom_name_icon&repo=shareui_official"
 
 REQUEST_PICK_IMAGE = 3721
 
@@ -409,7 +410,9 @@ class ExteraCustomNameIconPlugin(BasePlugin):
     def on_open_github(self, v):
         Browser.openUrl(get_current_activity(), Uri.parse(GITHUB_URL))
 
-
+    def on_open_packit(self, v):
+        Browser.openUrl(get_current_activity(), Uri.parse(PACKIT_URL))
+    
     def create_settings(self) -> List[Any]:
         return [
             Header(text=get_str("client_name")),
@@ -463,5 +466,11 @@ class ExteraCustomNameIconPlugin(BasePlugin):
                 icon="msg_link",
                 text="GitHub",
                 on_click=self.on_open_github
+            ),
+            Text(
+                link_alias="packit",
+                icon="msg_link",
+                text="PackIt",
+                on_click=self.on_open_packit
             )
         ]
